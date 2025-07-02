@@ -1,0 +1,16 @@
+{
+  "name": "foss4g-e-2025",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Materials for the FOSS4G-E 2025",
+  "scripts": {
+    "start": "vite dev",
+    "build": "vite build"
+  },
+  "author": "terrestris GmbH & Co. KG",
+  "license": "cc-by-sa-4.0",
+  "dependencies": { },
+  "devDependencies": {
+    "vite": "^7.0.0"
+  }
+}
