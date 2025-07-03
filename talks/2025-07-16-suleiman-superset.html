@@ -1,0 +1,452 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="shortcut icon" href="../img/terrestris.svg">
+
+  <title>Superset - Business Intelligence meets Cartography</title>
+
+  <link rel="stylesheet" href="../reveal.js/dist/reset.css">
+  <link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="../reveal.js/dist/theme/simple.css">
+
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="../reveal.js/plugin/highlight/monokai.css">
+  <style>
+    section {
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: space-between !important;
+      top: unset !important;
+      height: 100%;
+    }
+
+    .slide-header {}
+
+    .slide-content-default {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+
+    .slide-content-horizontal {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+
+    footer {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      font-size: small;
+    }
+
+    footer img {
+      margin: 0 !important;
+    }
+
+    blockquote {
+      box-shadow: unset !important;
+    }
+
+    .blurry-banner {
+      width: 100%;
+      backdrop-filter: blur(8px) grayscale(100%);
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 20px;
+    }
+
+    .gap {
+      gap: 100px;
+    }
+
+    .r-stack img {
+      max-height: 850px;
+    }
+
+    .img-shadow {
+      box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .code-small>code {
+      overflow: hidden !important;
+    }
+
+    .reveal section a.email {
+      background-image: url("../img/mail-logo.png");
+      background-repeat: no-repeat;
+      background-position: left center;
+      padding-left: 1.7em;
+      background-size: 1.2em 1.2em;
+    }
+
+    .reveal section a.github {
+      background-image: url("../img/github-logo.png");
+      background-repeat: no-repeat;
+      background-position: left center;
+      padding-left: 1.7em;
+      background-size: 1.2em 1.2em;
+    }
+
+    .reveal section a.url {
+      background-image: url("../img/url-logo.png");
+    }
+
+    .question-box {
+      background-color: #66c2a5;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section id="title" data-background-image="../img/superset/superset-logo.svg">
+        <div class="fragment slide-content-default" style="justify-content: center; padding: 0;">
+          <div class="blurry-banner">
+            <h2>Superset <br /> - <br /> Business Intelligence meets Cartography</h2>
+            <p>
+              <small>Jan Suleiman, terrestris GmbH &amp; Co. KG</small> <br />
+              <small>FOSS4G Europe 2025, Mostar, Bosnia</small>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-content-default" style="justify-content: center;">
+          <h2>Jan Suleiman</h2>
+          <div class="slide-content-horizontal gap" style="flex: unset; justify-content: center; align-items: start;">
+            <div>
+              <img src="../img/js.jpeg" class="plain" width="200" /><br />
+              <small>
+                <a class="email" href="mailto:suleiman@terrestris.de">suleiman@terrestris.de</a><br />
+                <a class="github" href="https://github.com/jansule/">@jansule</a><br />
+              </small><br />
+            </div>
+            <ul>
+              <li>M.Sc. Geoinformatics</li>
+              <li>Full-Stack Developer<br />@terrestris, Bonn, Germany</li>
+              <li>OSGeo Charter Member</li>
+              <li>GeoStyler Core Developer</li>
+              <li>Superset Plugin Developer</li>
+            </ul>
+          </div>
+        </div>
+        <footer>
+          <img src="../img/terrestris.svg" height="30px" />
+          <span>Superset - Business Intelligence meets Cartography, FOSS4G Europe 2025, Mostar, Bosnia</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2 class="slide-header">Content</h2>
+        <div class="slide-content-default gap" style="justify-content: center">
+          <ol>
+            <li>Superset Basics</li>
+            <li>Thematic Maps in Superset</li>
+            <li>State of Development</li>
+            <li>Future Developments</li>
+          </ol>
+          <small>Link to slides:<br /><a
+              href="https://terrestris.github.io/foss4g-e-2025/talks/2025-07-16-suleiman-superset.html">https://terrestris.github.io/foss4g-e-2025/talks/2025-07-16-suleiman-superset.html</a></small>
+        </div>
+        <footer>
+          <img src="../img/terrestris.svg" height="30px" />
+          <span>Superset - Business Intelligence meets Cartography, FOSS4G Europe 2025, Mostar, Bosnia</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2 class="slide-header">Superset Basics</h2>
+        <div class="slide-content-horizontal gap">
+          <img class="img-shadow" src="../img/superset/world-bank-dashboard.png" height="500px" />
+          <ul>
+            <li>Data exploration and visualization platform</li>
+            <li>No-Code / Low-Code</li>
+            <li>Arrange charts on interactive<br />dashboards</li>
+          </ul>
+        </div>
+        <footer>
+          <img src="../img/terrestris.svg" height="30px" />
+          <span>Superset - Business Intelligence meets Cartography, FOSS4G Europe 2025, Mostar, Bosnia</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2 class="slide-header">Superset Basics</h2>
+        <div class="slide-content-horizontal gap">
+          <ul>
+            <li>Apache-2.0 license</li>
+            <li>Active community</li>
+            <li>Plugin architecture for visualizations</li>
+          </ul>
+          <img src="../img/superset/superset-frameworks.svg" height="400px" />
+        </div>
+        <footer>
+          <img src="../img/terrestris.svg" height="30px" />
+          <span>Superset - Business Intelligence meets Cartography, FOSS4G Europe 2025, Mostar, Bosnia</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2 class="slide-header">Superset Basics</h2>
+        <div class="slide-content-default">
+          <img src="../img/superset/superset-features.svg" height="500px" />
+        </div>
+        <footer>
+          <img src="../img/terrestris.svg" height="30px" />
+          <span>Superset - Business Intelligence meets Cartography, FOSS4G Europe 2025, Mostar, Bosnia</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2 class="slide-header">Thematic Maps in Superset</h2>
+        <span>Current Map Plugins</span>
+        <div class="slide-content-horizontal gap">
+          <img style="flex: 1" class="img-shadow" src="../img/superset/map-plugins.png" height="500px" />
+          <ul style="flex: 1">
+            <li>Broad Variety</li>
+            <li>
+              <strong>But:</strong> many based on mapbox-gl
+              <ul>
+                <li>Closed Source</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <footer>
+          <img src="../img/terrestris.svg" height="30px" />
+          <span>Superset - Business Intelligence meets Cartography, FOSS4G Europe 2025, Mostar, Bosnia</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2 class="slide-header">Thematic Maps in Superset</h2>
+        <span>Current Map Plugins</span>
+        <div class="slide-content-horizontal gap">
+          <img style="flex: 1" class="img-shadow" src="../img/superset/map-plugins-highlighted.svg" height="500px" />
+          <ul style="flex: 1">
+            <li>
+              <span style="font-style: italic">Cartodiagram</span>
+              <ul>
+                <li>Arbitrary charts on maps</li>
+                <li>Released in Superset 5</li>
+              </ul>
+            </li>
+            <li>
+              <span style="font-style: italic">Thematic Map</span>
+              <ul>
+                <li>Choropleth, Proportional Symbol, …</li>
+                <li>Currently as fork</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <footer>
+          <img src="../img/terrestris.svg" height="30px" />
+          <span>Superset - Business Intelligence meets Cartography, FOSS4G Europe 2025, Mostar, Bosnia</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2 class="slide-header">Thematic Maps in Superset</h2>
+        <div class="slide-content-default">
+          <span>Libraries</span>
+          <div class="slide-content-default">
+            <img src="../img/superset/plugin-foundations.svg" />
+          </div>
+        </div>
+        <footer>
+          <img src="../img/terrestris.svg" height="30px" />
+          <span>Superset - Business Intelligence meets Cartography, FOSS4G Europe 2025, Mostar, Bosnia</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2 class="slide-header">Thematic Maps in Superset</h2>
+        <div class="slide-content-default" style="justify-content: center; align-items: stretch;">
+          <div class="slide-content-horizontal">
+            <iframe class="img-shadow"
+              data-src="https://superset-fossgis-2025.terrestris.de/superset/dashboard/32/?standalone=1" data-preload
+              width="100%" height="100%"></iframe>
+          </div>
+        </div>
+        <footer>
+          <img src="../img/terrestris.svg" height="30px" />
+          <span>Superset - Business Intelligence meets Cartography, FOSS4G Europe 2025, Mostar, Bosnia</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2 class="slide-header">Thematic Maps in Superset</h2>
+        <div class="slide-content-default" style="justify-content: center; align-items: stretch;">
+          <div class="slide-content-horizontal">
+            <iframe class="img-shadow"
+              data-src="https://superset-fossgis-2025.terrestris.de/superset/dashboard/30?standalone=1" data-preload
+              width="100%" height="100%"></iframe>
+          </div>
+        </div>
+        <footer>
+          <img src="../img/terrestris.svg" height="30px" />
+          <span>Superset - Business Intelligence meets Cartography, FOSS4G Europe 2025, Mostar, Bosnia</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2 class="slide-header">Thematic Maps in Superset</h2>
+        <div class="slide-content-default">
+          <img src="../img/superset/workflow_cartodiagram.svg" height="800px" />
+        </div>
+        <footer>
+          <img src="../img/terrestris.svg" height="30px" />
+          <span>Superset - Business Intelligence meets Cartography, FOSS4G Europe 2025, Mostar, Bosnia</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2 class="slide-header">State of Development</h2>
+        <div class="slide-content-horizontal gap" style="align-items: flex-start; padding-top: 50px;">
+          <div style="display: flex; flex-direction: column; gap: 20px; flex: 1;">
+            <span>Done</span>
+            <ul>
+              <li>Official Cartodiagram Plugin (Superset 5)</li>
+              <li>Support for GeoJSON</li>
+              <li>Arbitrary map projections</li>
+              <li>
+                Configurability
+                <ul>
+                  <li>Map extent</li>
+                  <li>Zoom levels</li>
+                  <li>Background layers</li>
+                  <li>…</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 20px; flex: 1;">
+            <span>In Development</span>
+            <ul>
+              <li>Support for WKB, WKT</li>
+              <li>Support for WFS as data source</li>
+              <li>Finalizing Thematic Map Plugin</li>
+              <li>Cross Filters for Thematic Maps</li>
+            </ul>
+          </div>
+        </div>
+        <small>Up-to-date dev image: <a
+            href="https://github.com/terrestris/superset/pkgs/container/superset">ghcr.io/terrestris/superset:latest</a></small>
+        <footer>
+          <img src="../img/terrestris.svg" height="30px" />
+          <span>Superset - Business Intelligence meets Cartography, FOSS4G Europe 2025, Mostar, Bosnia</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2 class="slide-header">Future Developments</h2>
+        <div class="slide-content-horizontal gap">
+            <ul>
+              <li>Animated timeslider</li>
+              <li>OGC API Features as data source</li>
+              <li>Sensor Things API as data source</li>
+            </ul>
+        </div>
+        <small>Up-to-date dev image: <a
+            href="https://github.com/terrestris/superset/pkgs/container/superset">ghcr.io/terrestris/superset:latest</a></small>
+        <footer>
+          <img src="../img/terrestris.svg" height="30px" />
+          <span>Superset - Business Intelligence meets Cartography, FOSS4G Europe 2025, Mostar, Bosnia</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2>Imprint</h2>
+        <div class="slide-content">
+          <h4>Author</h4>
+          <div class="slide-content-horizontal" style="flex: unset">
+            <address style="text-align: left">
+              <strong>Jan Suleiman</strong><br />
+              <span style="font-size: smaller;">
+                terrestris GmbH &amp; Co. KG<br />
+                K&ouml;lnstr. 99, 53111 Bonn, Germany<br />
+                suleiman@terrestris.de
+              </span>
+            </address>
+            </address>
+          </div>
+        </div>
+        <div class="slide-content" style="flex: unset">
+          <h4 style="clear:both;">Licence</h4>
+          <p id="license">
+            <small>
+              The slides are licenced as <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.<br />
+              <a
+                href="https://terrestris.github.io/foss4g-e-2025/talks/2025-07-16-suleiman-superset.html">https://terrestris.github.io/foss4g-e-2025/talks/2025-07-16-suleiman-superset.html</a>
+            </small>
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-content-default">
+          <h2 class="slide-header">Questions?</h2>
+        </div>
+        <footer>
+          <img src="../img/terrestris.svg" height="30px" />
+          <span>Superset - Business Intelligence meets Cartography, FOSS4G Europe 2025, Mostar, Bosnia</span>
+          <div></div>
+        </footer>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="../reveal.js/dist/reveal.js"></script>
+  <script src="../reveal.js/plugin/notes/notes.js"></script>
+  <script src="../reveal.js/plugin/markdown/markdown.js"></script>
+  <script src="../reveal.js/plugin/highlight/highlight.js"></script>
+  <script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+      width: '100%',
+      height: '100%',
+      hash: true,
+      controlsTutorial: false,
+      transition: 'fade',
+
+      // Learn about plugins: https://revealjs.com/plugins/
+      plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+    });
+  </script>
+</body>
+
+</html>
