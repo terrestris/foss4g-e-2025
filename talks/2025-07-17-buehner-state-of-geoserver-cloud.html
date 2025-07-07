@@ -15,6 +15,9 @@
   <!-- Theme used for syntax highlighted code -->
   <link rel="stylesheet" href="../reveal.js/plugin/highlight/monokai.css">
   <style>
+    @media print {
+    }
+
     section {
       display: flex !important;
       flex-direction: column !important;
@@ -25,6 +28,7 @@
 
     .slide-content-default {
       flex: 1;
+      overflow: auto;
       display: flex;
       flex-direction: column;
       justify-content: space-evenly;
@@ -44,7 +48,7 @@
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-      font-size: small;
+      font-size: 0.7em;
     }
 
     footer img {
@@ -72,6 +76,10 @@
 
     .code-small>code {
       overflow: hidden !important;
+    }
+
+    ul li {
+      line-height: 1.5;
     }
 
     .reveal section a.email:before {
@@ -140,22 +148,188 @@
         </div>
       </section>
 
-
       <section>
-        <h2>GeoServer Cloud Service Registry</h2>
-        <div>
-          <img src="../img/geoserver-cloud/gs-cloud-ui.png" height="70%" />
+        <div class="slide-content-default" style="justify-content: center;">
+          <h2>Nils Bühner</h2>
+          <div class="slide-content-horizontal" style="flex: unset; justify-content: center; align-items: start;">
+            <div>
+              <img src="../img/nb.jpg" class="plain" width="200" /><br />
+              <small>
+                <a class="email" href="mailto:buehner@terrestris.de">buehner@terrestris.de</a><br />
+                <a class="github" href="https://github.com/buehner/">@buehner</a><br />
+              </small><br />
+            </div>
+            <ul>
+              <li>Software Engineer<br />@terrestris, Bonn, Germany</li>
+              <li>GeoServer Docker project maintainer</li>
+              <li>GeoServer Cloud contributor</li>
+            </ul>
+            <div>
+                <img src="../img/terrestris.svg" class="plain" width="300" /><br />
+            </div>
+          </div>
         </div>
+        <footer>
+          <img src="../img/terrestris.svg" height="50px" />
+          <span>State of GeoServer Cloud, FOSS4G-E 2025, Mostar</span>
+          <div></div>
+        </footer>
       </section>
 
+      <section>
+        <h2>Content</h2>
+        <div class="slide-content-default">
+          <ul>
+            <li>Why GeoServer cloud?</li>
+            <li>GeoServer Cloud Architecture</li>
+            <li>State of Development</li>
+            <li>GeoServer extensions in GS Cloud</li>
+            <li>Case studies (by Alexandre)</li>
+          </ul>
+          <small>Link to slides:<br /><a
+              href="https://terrestris.github.io/foss4g-e-2025/talks/2025-07-17-buehner-state-of-geoserver-cloud.html">https://terrestris.github.io/foss4g-e-2025/talks/2025-07-17-buehner-state-of-geoserver-cloud.html</a></small>
+        </div>
+        <footer>
+          <img src="../img/terrestris.svg" height="50px" />
+          <span>State of GeoServer Cloud, FOSS4G-E 2025, Mostar</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2>Vanilla GeoServer</h2>
+        <div class="slide-content-default gap">
+          <ul>
+            <li>The GeoServer project has matured in 20+ years</li>
+            <li><a href="https://github.com/geoserver/geoserver">github.com/geoserver/geoserver</a></li>
+            <li>Implements OGC standards:<br>WMS, WFS, WCS, WMTS, SLD, etc.</li>
+            <li>Many extensions</li>
+            <li>Active development</li>
+            <li>Proven and robust in production</li>
+          </ul>
+        </div>
+        <footer>
+          <img src="../img/terrestris.svg" height="50px" />
+          <span>State of GeoServer Cloud, FOSS4G-E 2025, Mostar</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2>Why GeoServer Cloud?</h2>
+        <div class="slide-content-default">
+          <ul>
+            <li>Cloud techs increasingly important in modern GIS architectures</li>
+            <li>Vanilla GeoServer is <b>not</b> cloud-native</li>
+            <li>It's a <b>monolithic</b> application</li>
+            <li>Lack of native support for <b>horizontal scaling</b></li>
+          </ul>
+        </div>
+        <footer>
+          <img src="../img/terrestris.svg" height="50px" />
+          <span>State of GeoServer Cloud, FOSS4G-E 2025, Mostar</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+          <h2>Scaling the monolithic, vanilla GeoServer</h2>
+          <div class="mermaid" style="overflow: auto;">
+            <pre>
+%%{ init: { "theme": "default" } }%%
+flowchart TD
+    Clients(["🌐 HTTP Requests"])
+    Clients-. "https://.../geoserver" .-> Gateway
+
+    subgraph Cloud [" "]
+        Gateway[/"⚖️ LoadBalancer / Gateway"/]
+        style Gateway fill:#cc99ff
+        %% Pods Layer
+        subgraph Pods [" "]
+            GeoServer1["🌍 GeoServer n"]
+            GeoServer2["🌎 GeoServer 2"]
+            GeoServer3["🌏 GeoServer 1"]
+        end
+        %% Storage Layer
+        subgraph Data storage [" "]
+            GSDataDir[("📁 (Shared) GS Catalog/Datadir (XML)")]
+            PostGIS[(🗄️ PostGIS Geodata)]
+            style GSDataDir fill:#ffcc99
+            style PostGIS fill:#c2d6d6
+        end
+    end
+
+
+    Gateway --> GeoServer1
+    Gateway --> GeoServer2
+    Gateway --> GeoServer3
+
+    GeoServer1 -->|read/write| GSDataDir
+    GeoServer2 -->|read/write| GSDataDir
+    GeoServer3 -->|read/write| GSDataDir
+
+    Pods --> PostGIS
+          </pre>
+        </div>
+        <footer>
+          <img src="../img/terrestris.svg" height="50px" />
+          <span>State of GeoServer Cloud, FOSS4G-E 2025, Mostar</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2>GeoServer Cloud Features</h2>
+        <div class="slide-content-default" >
+          <div class="slide-content-horizontal" style="gap: 20px;">
+            <div>
+              <div>
+                <span>A scalable GeoServer for the Cloud</span><br />
+                <small>Repository: <a href="https://github.com/geoserver/geoserver-cloud">github.com/geoserver/geoserver-cloud</a></small>
+              </div>
+              <div style="flex: 1;">
+                <span>Modern Microservice Architecture</span><br />
+                <small>Service Discovery & Message Broadcasting with Spring Boot</small><br />
+              </div>
+              <div style="flex: 1;">
+                <span>Cloud-Optimized Features</span><br />
+                <small>High-performance catalog access and security features like GeoServer ACL (Geofencing)</small>
+              </div>
+              <div style="flex: 1;">
+                <span>Cloud Native & DevOps Friendly</span><br />
+                <small>Intuitive usage with Docker, Kubernetes and more</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer>
+          <img src="../img/terrestris.svg" height="50px" />
+          <span>State of GeoServer Cloud, FOSS4G-E 2025, Mostar</span>
+          <div></div>
+        </footer>
+      </section>
 
       <section>
         <h2>GeoServer Cloud Architecture</h2>
-        <div>
-          <img src="../img/geoserver-cloud/gs-cloud-architecture.svg" height="70%" />
+        <div class="slide-content-default">
+          <img src="../img/geoserver-cloud/gs-cloud-architecture.svg"  style="min-height: 500px" />
         </div>
         <footer>
-          <img src="../img/geoserver-cloud/gs.svg" height="30px" />
+          <img src="../img/terrestris.svg" height="50px" />
+          <span>State of GeoServer Cloud, FOSS4G-E 2025, Mostar</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2>GeoServer Cloud Service Registry</h2>
+        <div class="slide-content-default">
+          <div>
+            <img src="../img/geoserver-cloud/gs-cloud-ui.png" style="width: 70%;max-height:200%;" />
+          </div>
+        </div>
+        <footer>
+          <img src="../img/terrestris.svg" height="50px" />
           <span>State of GeoServer Cloud, FOSS4G-E 2025, Mostar</span>
           <div></div>
         </footer>
@@ -163,17 +337,17 @@
 
       <section>
         <h2>CodeSprint (October 2024)</h2>
-        <div class="slide-content-default" style="justify-content: center; align-items: stretch;">
+        <div class="slide-content-default">
           <div class="slide-content-horizontal" style="gap: 20px;">
-            <img src="../img/geoserver-cloud/codesprint1.jpg" width="50%" />
-            <img src="../img/geoserver-cloud/codesprint2.jpg" width="50%" />
+            <img src="../img/geoserver-cloud/codesprint1.jpg" width="45%" />
+            <img src="../img/geoserver-cloud/codesprint2.jpg" width="45%" />
           </div>
           <div>
-            <small>Erster GeoServer Cloud CodeSprint bei Camptocamp in Chambéry, Frankreich</small>
+            <small>GeoServer Cloud CodeSprint at Camptocamp in Chambéry, France</small>
           </div>
         </div>
         <footer>
-          <img src="../img/geoserver-cloud/gs.svg" height="30px" />
+          <img src="../img/terrestris.svg" height="50px" />
           <span>State of GeoServer Cloud, FOSS4G-E 2025, Mostar</span>
           <div></div>
         </footer>
@@ -187,7 +361,7 @@
           </div>
         </div>
         <footer>
-          <img src="../img/geoserver-cloud/gs.svg" height="30px" />
+          <img src="../img/terrestris.svg" height="50px" />
           <span>State of GeoServer Cloud, FOSS4G-E 2025, Mostar</span>
           <div></div>
         </footer>
@@ -199,6 +373,7 @@
   <script src="../reveal.js/dist/reveal.js"></script>
   <script src="../reveal.js/plugin/notes/notes.js"></script>
   <script src="../reveal.js/plugin/markdown/markdown.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js-mermaid-plugin@11.6.0/plugin/mermaid/mermaid.js"></script>
   <script src="../reveal.js/plugin/highlight/highlight.js"></script>
   <script>
     // More info about initialization & config:
@@ -210,9 +385,18 @@
       hash: true,
       controlsTutorial: false,
       transition: 'fade',
+      // pdfMaxPagesPerSlide: 1,
+      pdfSeparateFragments: false,
+
+      // mermaid initialize config
+      mermaid: {
+        // flowchart: {
+        //   curve: 'linear',
+        // },
+      },
 
       // Learn about plugins: https://revealjs.com/plugins/
-      plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+      plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMermaid]
     });
   </script>
 </body>
