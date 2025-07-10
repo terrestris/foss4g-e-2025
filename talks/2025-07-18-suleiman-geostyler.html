@@ -1,0 +1,558 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="shortcut icon" href="../img/geostyler/geostyler_logo.svg">
+
+  <title>GeoStyler - Support for ArcGIS and other new Features</title>
+
+  <link rel="stylesheet" href="../reveal.js/dist/reset.css">
+  <link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="../reveal.js/dist/theme/simple.css">
+
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="../reveal.js/plugin/highlight/monokai.css">
+  <style>
+    section {
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: space-between !important;
+      top: unset !important;
+      height: 100%;
+    }
+
+    .slide-header {}
+
+    .slide-content-default {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+
+    .slide-content-horizontal {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+
+    footer {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      font-size: small;
+    }
+
+    footer img {
+      margin: 0 !important;
+    }
+
+    blockquote {
+      box-shadow: unset !important;
+    }
+
+    .blurry-banner {
+      width: 100%;
+      backdrop-filter: blur(8px) grayscale(100%);
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 20px;
+    }
+
+    .gap {
+      gap: 100px;
+    }
+
+    .r-stack img {
+      max-height: 850px;
+    }
+
+    .img-shadow {
+      box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .code-small>code {
+      overflow: hidden !important;
+    }
+
+    .reveal section a.email {
+      background-image: url("../img/mail-logo.png");
+      background-repeat: no-repeat;
+      background-position: left center;
+      padding-left: 1.7em;
+      background-size: 1.2em 1.2em;
+    }
+
+    .reveal section a.github {
+      background-image: url("../img/github-logo.png");
+      background-repeat: no-repeat;
+      background-position: left center;
+      padding-left: 1.7em;
+      background-size: 1.2em 1.2em;
+    }
+
+    .reveal section a.url {
+      background-image: url("../img/url-logo.png");
+    }
+
+    .question-box {
+      background-color: #66c2a5;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.25em 0.6em;
+      font-size: 40%;
+      font-weight: 600;
+      color: #fff;
+      background-color: #d9534f;
+      /* Bootstrap red */
+      border-radius: 1em;
+      vertical-align: middle;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section id="title" data-background-image="../img/geostyler/geostyler_logo.svg" data-background-size="auto 85%">
+        <div class="fragment slide-content-default blurry-banner" style="justify-content: center; padding: 0;">
+          <h1>GeoStyler - Support for ArcGIS and other new Features</h1>
+          <p>
+            <small>Jan Suleiman, terrestris GmbH &amp; Co. KG</small> <br />
+          </p>
+          <small>FOSS4G Europe 2025, Mostar, Bosnia-Herzegovina</small>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-content-default" style="justify-content: center;">
+          <h2>Jan Suleiman</h2>
+          <div class="slide-content-horizontal gap" style="flex: unset; justify-content: center; align-items: start;">
+            <div>
+              <img src="../img/js.jpeg" class="plain" width="200" /><br />
+              <small>
+                <a class="email" href="mailto:suleiman@terrestris.de">suleiman@terrestris.de</a><br />
+                <a class="github" href="https://github.com/jansule/">@jansule</a><br />
+              </small><br />
+            </div>
+            <ul>
+              <li>M.Sc. Geoinformatics</li>
+              <li>Full-Stack Developer<br />@terrestris, Bonn, Germany</li>
+              <li>OSGeo Charter Member</li>
+              <li>GeoStyler Core Developer</li>
+              <li>Superset Plugin Developer</li>
+            </ul>
+          </div>
+        </div>
+        <footer>
+          <img src="../img/geostyler/geostyler_logo.svg" height="30px" />
+          <span>GeoStyler - Support for ArcGIS and other new Features, FOSS4G Europe 2025, Mostar,
+            Bosnia-Herzegovina</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2 class="slide-header">Content</h2>
+        <div class="slide-content-default gap" style="justify-content: center">
+          <ol>
+            <li>Support for ArcGIS</li>
+            <li>GeoStyler Rest + OGC API Styles</li>
+            <li>OpenLayers Flat Styles</li>
+            <li>Other news</li>
+          </ol>
+          <small>Link to slides:<br /><a
+              href="https://terrestris.github.io/foss4g-e-2025/talks/2025-07-18-suleiman-geostyler.html">https://terrestris.github.io/foss4g-e-2025/talks/2025-07-18-suleiman-geostyler.html</a></small>
+        </div>
+        <footer>
+          <img src="../img/geostyler/geostyler_logo.svg" height="30px" />
+          <span>GeoStyler - Support for ArcGIS and other new Features, FOSS4G Europe 2025, Mostar,
+            Bosnia-Herzegovina</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2>What is GeoStyler?</h2>
+        <div class="slide-content-default">
+          <img src="../img/geostyler/geostyler-parsers.png" height="600px" />
+        </div>
+        <footer>
+          <img src="../img/geostyler/geostyler_logo.svg" height="30px" />
+          <span>GeoStyler - Support for ArcGIS and other new Features, FOSS4G Europe 2025, Mostar,
+            Bosnia-Herzegovina</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2>Support for ArcGIS</h2>
+        <div class="slide-content-default">
+          <img src="../img/geostyler/geostyler-parsers-arcgis.png" height="600px" />
+        </div>
+        <footer>
+          <img src="../img/geostyler/geostyler_logo.svg" height="30px" />
+          <span>GeoStyler - Support for ArcGIS and other new Features, FOSS4G Europe 2025, Mostar,
+            Bosnia-Herzegovina</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2>Support for ArcGIS</h2>
+        <div class="slide-content-default" style="justify-content: center; align-items: stretch;">
+          <div class="slide-content-horizontal" style="gap: 20px;">
+            <div style="flex: 1; font-size: smaller">
+              <ul>
+                <li>Repository: <a
+                    href="https://github.com/geostyler/geostyler-lyrx-parser">geostyler/geostyler-lyrx-parser</a></li>
+                <li>Based on <a href="https://github.com/GeoCat/bridge-style">GeoCat/bridge-style</a></li>
+                <li>Features</li>
+                <ul>
+                  <li>Polygons</li>
+                  <li>Lines</li>
+                  <li>Points</li>
+                  <li>Labels</li>
+                  <li>Marks</li>
+                  <li>Hatches</li>
+                  <li>...</li>
+                </ul>
+                <li>Limitations</li>
+                <ul>
+                  <li>.lyrx only</li>
+                  <li>read only</li>
+                </ul>
+              </ul>
+            </div>
+            <div style="width: 640px; display: flex; flex-direction: column; gap: 20px;">
+              <img src="../img/geostyler/arcgis-example.png" height="300px" />
+              <img src="../img/geostyler/arcgis-example-2.png" height="300px" />
+            </div>
+          </div>
+          <div>
+            <small>Kudos to Benjamin, Wolfgang, Myriam, Thomas, Eva, Balz!</small>
+          </div>
+        </div>
+        <footer>
+          <img src="../img/geostyler/geostyler_logo.svg" height="30px" />
+          <span>GeoStyler - Support for ArcGIS and other new Features, FOSS4G Europe 2025, Mostar,
+            Bosnia-Herzegovina</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2>Support for ArcGIS</h2>
+        <div class="slide-content-default" style="justify-content: center; align-items: stretch;">
+          <span>Now usable with with all GeoStyler tools</span>
+          <div class="slide-content-horizontal" style="gap: 20px; flex: 1;">
+            <img src="../img/geostyler/tools.png" height="250px" />
+          </div>
+        </div>
+        <footer>
+          <img src="../img/geostyler/geostyler_logo.svg" height="30px" />
+          <span>GeoStyler - Support for ArcGIS and other new Features, FOSS4G Europe 2025, Mostar,
+            Bosnia-Herzegovina</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2>OGC API Styles</h2>
+        <div class="slide-content-default">
+          <span>OGC API Styles<small><sup class="badge">Draft</sup></small></span>
+          <small>API for managing and fetching style documents</small>
+          <div style="flex: 1"></div>
+          <div class="slide-content-horizontal" style="align-items: flex-start; gap: 100px;">
+            <div class="slide-content-default" style="align-items: flex-start;">
+              <span>Main concepts</span>
+              <ul>
+                <li>Style as main resource</li>
+                <li>Multiple stylesheets per style</li>
+                <li>Style metadata</li>
+              </ul>
+            </div>
+            <div class="slide-content-default" style="align-items: flex-start;">
+              <span>Benefits</span>
+              <ul>
+                <li>Interoperability</li>
+                <li>Automation</li>
+                <li>Centralized style management</li>
+              </ul>
+            </div>
+          </div>
+          <div style="flex: 1"></div>
+        </div>
+        <footer>
+          <img src="../img/geostyler/geostyler_logo.svg" height="30px" />
+          <span>GeoStyler - Support for ArcGIS and other new Features, FOSS4G Europe 2025, Mostar,
+            Bosnia-Herzegovina</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2>OGC API Styles</h2>
+        <div class="slide-content-default">
+          <span>OGC API Styles<small><sup class="badge">Draft</sup></small></span>
+          <small>API for managing and fetching style documents</small>
+          <div style="flex: 1"></div>
+          <div class="slide-content-horizontal" style="align-items: flex-start; gap: 100px;">
+            <div class="slide-content-default" style="align-items: flex-start;">
+              <span>Main concepts</span>
+              <ul>
+                <li>Style as main resource</li>
+                <li><strong>Multiple stylesheets per style</strong></li>
+                <li>Style metadata</li>
+              </ul>
+            </div>
+            <div class="slide-content-default" style="align-items: flex-start;">
+              <span>Benefits</span>
+              <ul>
+                <li>Interoperability</li>
+                <li>Automation</li>
+                <li>Centralized style management</li>
+              </ul>
+            </div>
+          </div>
+          <div style="flex: 1"></div>
+        </div>
+        <footer>
+          <img src="../img/geostyler/geostyler_logo.svg" height="30px" />
+          <span>GeoStyler - Support for ArcGIS and other new Features, FOSS4G Europe 2025, Mostar,
+            Bosnia-Herzegovina</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2>GeoStyler REST + OGC API Styles</h2>
+        <div class="slide-content-default">
+          <img src="../img/geostyler/ogc-api-styles-concept.svg" height="600px" />
+        </div>
+        <footer>
+          <img src="../img/geostyler/geostyler_logo.svg" height="30px" />
+          <span>GeoStyler - Support for ArcGIS and other new Features, FOSS4G Europe 2025, Mostar,
+            Bosnia-Herzegovina</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2>GeoStyler REST + OGC API Styles</h2>
+        <div class="slide-content-default">
+          <img src="../img/geostyler/ogc-api-styles-concept-arcgis.svg" height="600px" />
+        </div>
+        <footer>
+          <img src="../img/geostyler/geostyler_logo.svg" height="30px" />
+          <span>GeoStyler - Support for ArcGIS and other new Features, FOSS4G Europe 2025, Mostar,
+            Bosnia-Herzegovina</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2>GeoStyler REST + OGC API Styles</h2>
+        <div class="slide-content-default">
+          <div>
+            <span>Try it out:</span>
+            <a href="https://rest.geostyler.org">rest.geostyler.org</a>
+          </div>
+          <iframe class="img-shadow" data-src="https://rest.geostyler.org/api-docs#tag/default/get/ogc/styles"
+            data-preload width="100%" height="100%"></iframe>
+        </div>
+        <footer>
+          <img src="../img/geostyler/geostyler_logo.svg" height="30px" />
+          <span>GeoStyler - Support for ArcGIS and other new Features, FOSS4G Europe 2025, Mostar,
+            Bosnia-Herzegovina</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2>GeoStyler REST + OGC API Styles</h2>
+        <span>Benefits</span>
+        <div class="slide-content-default">
+          <ul>
+            <li>One style - multiple applications</li>
+            <li>Low maintenance - no duplicates</li>
+            <li>Different tools for different purposes: Editing vs. SSR vs. CSR</li>
+            <hr />
+            <li>Transition to Open Source Software and Open Standards</li>
+          </ul>
+        </div>
+        <footer>
+          <img src="../img/geostyler/geostyler_logo.svg" height="30px" />
+          <span>GeoStyler - Support for ArcGIS and other new Features, FOSS4G Europe 2025, Mostar,
+            Bosnia-Herzegovina</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2>OpenLayers Flat Styles Parser</h2>
+        <div class="slide-content-default">
+          <a href="https://github.com/geostyler/geostyler-openlayers-parser/">geostyler/geostyler-openlayers-parser</a>
+          <div class="slide-content-horizontal" style="gap: 50px;">
+            <img src="../img/geostyler/geostyler-parsers-arcgis-olflat.png" height="500px" />
+            <ul>
+              <li>Serializable</li>
+              <li>Configuration over implementation</li>
+              <li>Integration in CLI, GeoStyler REST, etc.</li>
+            </ul>
+          </div>
+        </div>
+        <footer>
+          <img src="../img/geostyler/geostyler_logo.svg" height="30px" />
+          <span>GeoStyler - Support for ArcGIS and other new Features, FOSS4G Europe 2025, Mostar,
+            Bosnia-Herzegovina</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2>Other news</h2>
+        <div class="slide-content-default" style="justify-content: center; align-items: stretch;">
+          <div class="slide-content-horizontal" style="gap: 20px;">
+            <div style="flex: 1;">
+              <div>
+                <span>QGIS Plugin</span><br />
+                <small>Repository: <a
+                    href="https://github.com/geostyler/geostyler-qgis-plugin">geostyler/geostyler-qgis-plugin</a></small>
+              </div>
+              <div style="flex: 1;">
+                <span>General improvements</span><br />
+                <small>Better UI, better expressions, better parsers</small>
+              </div>
+              <div style="flex: 1;">
+                <span>Dedicated Server</span><br />
+                <small>More demos, more services, more GeoStyler</small>
+              </div>
+            </div>
+            <div style="width: 640px; display: flex; flex-direction: column; gap: 20px;">
+              <img src="../img/geostyler/qgis-plugin.png" />
+            </div>
+          </div>
+        </div>
+        <footer>
+          <img src="../img/geostyler/geostyler_logo.svg" height="30px" />
+          <span>GeoStyler - Support for ArcGIS and other new Features, FOSS4G Europe 2025, Mostar,
+            Bosnia-Herzegovina</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2>GeoStyler Code Sprint 2025</h2>
+        <div class="slide-content-default" style="justify-content: center;">
+          <img class="img-shadow" src="https://geostyler.org/images/geostyler-codesprint-2025-members.png"
+            height="500px" />
+          <small>02.06. - 06.06.2025, Switzerland</small>
+          <small><a href="https://geostyler.org/codesprint-2025/">Blog Post GeoStyler Code
+              Sprint 2025</a></small>
+        </div>
+        <footer>
+          <img src="../img/geostyler/geostyler_logo.svg" height="30px" />
+          <span>GeoStyler - Support for ArcGIS and other new Features, FOSS4G Europe 2025, Mostar,
+            Bosnia-Herzegovina</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2>OSGeo Official</h2>
+        <div class="slide-content-default" style="justify-content: center;">
+          <img src="../img/geostyler/osgeo-logo.svg" height="300px" />
+          <span>Community Project → OSGeo Project</span>
+        </div>
+        <footer>
+          <img src="../img/geostyler/geostyler_logo.svg" height="30px" />
+          <span>GeoStyler - Support for ArcGIS and other new Features, FOSS4G Europe 2025, Mostar,
+            Bosnia-Herzegovina</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2>Questions?</h2>
+        <div class="slide-content-default" style="justify-content: center;">
+          <h4>Contact us on</h4>
+          <h4>Github: <a href="https://github.com/geostyler/geostyler" style="color: black;">geostyler/geostyler</a>
+          </h4>
+          <h4>Discord: <a href="https://discord.gg/yrXHDpcFcB" style="color: black;">discord.gg/yrXHDpcFcB</a></h4>
+        </div>
+        <footer>
+          <img src="../img/geostyler/geostyler_logo.svg" height="30px" />
+          <span>GeoStyler - Support for ArcGIS and other new Features, FOSS4G Europe 2025, Mostar,
+            Bosnia-Herzegovina</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2>Imprint</h2>
+        <div class="slide-content">
+          <h4>Author</h4>
+          <div class="slide-content-horizontal" style="flex: unset">
+            <address style="text-align: left">
+              <strong>Jan Suleiman</strong><br />
+              <span style="font-size: smaller;">
+                terrestris GmbH &amp; Co. KG<br />
+                K&ouml;lnstr. 99, 53111 Bonn, Germany<br />
+                suleiman@terrestris.de
+              </span>
+            </address>
+            </address>
+          </div>
+        </div>
+        <div class="slide-content" style="flex: unset">
+          <h4 style="clear:both;">Licence</h4>
+          <p id="license">
+            <small>
+              The slides are licenced as <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.<br />
+              <a
+                href="https://terrestris.github.io/foss4g-e-2025/talks/2025-07-18-suleiman-geostyler.html">https://terrestris.github.io/foss4g-e-2025/talks/2025-07-18-suleiman-geostyler.html</a>
+            </small>
+          </p>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script src="../reveal.js/dist/reveal.js"></script>
+  <script src="../reveal.js/plugin/notes/notes.js"></script>
+  <script src="../reveal.js/plugin/markdown/markdown.js"></script>
+  <script src="../reveal.js/plugin/highlight/highlight.js"></script>
+  <script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+      width: '100%',
+      height: '100%',
+      hash: true,
+      controlsTutorial: false,
+      transition: 'fade',
+
+      // Learn about plugins: https://revealjs.com/plugins/
+      plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+    });
+  </script>
+</body>
+
+</html>
