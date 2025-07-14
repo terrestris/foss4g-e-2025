@@ -43,6 +43,10 @@
       align-items: center;
     }
 
+    .small-li-margin ul li {
+      margin: 0em;
+    }
+
     footer {
       display: flex;
       flex-direction: row;
@@ -80,6 +84,7 @@
 
     ul li {
       line-height: 1.5;
+      margin-bottom: 0.5em;
     }
 
     .reveal section a.email:before {
@@ -144,7 +149,8 @@
           <p>
             <small>Nils Bühner, terrestris GmbH &amp; Co. KG</small> <br />
           </p>
-          <small>FOSS4G-E 2025, Mostar</small>
+          <small>FOSS4G-E 2025, Mostar</small><br />
+          <small><a href="https://terrestris.github.io/foss4g-e-2025/talks/gs-cloud.html">https://terrestris.github.io/foss4g-e-2025/talks/gs-cloud.html</a></small>
         </div>
       </section>
 
@@ -160,7 +166,7 @@
               </small><br />
             </div>
             <ul>
-              <li>Software Engineer<br />@terrestris, Bonn, Germany</li>
+              <li>Software Engineer<br />terrestris, Bonn, Germany</li>
               <li>GeoServer Docker project maintainer</li>
               <li>GeoServer Cloud contributor</li>
             </ul>
@@ -177,17 +183,15 @@
       </section>
 
       <section>
-        <h2>Content</h2>
+        <h2>GeoServer Cloud CodeSprint (October 2024)</h2>
         <div class="slide-content-default">
-          <ul>
-            <li>Why GeoServer cloud?</li>
-            <li>GeoServer Cloud Architecture</li>
-            <li>State of Development</li>
-            <li>GeoServer extensions in GS Cloud</li>
-            <li>Case studies (by Alexandre)</li>
-          </ul>
-          <small>Link to slides:<br /><a
-              href="https://terrestris.github.io/foss4g-e-2025/talks/2025-07-17-buehner-state-of-geoserver-cloud.html">https://terrestris.github.io/foss4g-e-2025/talks/2025-07-17-buehner-state-of-geoserver-cloud.html</a></small>
+          <div class="slide-content-horizontal" style="gap: 20px;">
+            <img src="../img/geoserver-cloud/codesprint1.jpg" width="45%" />
+            <img src="../img/geoserver-cloud/codesprint2.jpg" width="45%" />
+          </div>
+          <div>
+            <small>GeoServer Cloud CodeSprint at Camptocamp in Chambéry, France</small>
+          </div>
         </div>
         <footer>
           <img src="../img/terrestris.svg" height="50px" />
@@ -197,10 +201,30 @@
       </section>
 
       <section>
-        <h2>Vanilla GeoServer</h2>
+        <h2>Content</h2>
+        <div class="slide-content-default">
+          <ul>
+            <li>Why GeoServer cloud?</li>
+            <li>GeoServer Cloud Architecture</li>
+            <li>Features of GS Cloud</li>
+            <li>GeoServer extensions in GS Cloud</li>
+            <li>Case studies (by Alexandre)</li>
+          </ul>
+          <small>Slides:<br /><a
+              href="https://terrestris.github.io/foss4g-e-2025/talks/gs-cloud.html">https://terrestris.github.io/foss4g-e-2025/talks/gs-cloud.html</a></small>
+        </div>
+        <footer>
+          <img src="../img/terrestris.svg" height="50px" />
+          <span>State of GeoServer Cloud, FOSS4G-E 2025, Mostar</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2>Traditional GeoServer</h2>
         <div class="slide-content-default gap">
           <ul>
-            <li>The GeoServer project has matured in 20+ years</li>
+            <li>The GeoServer project has grown for 20+ years</li>
             <li><a href="https://github.com/geoserver/geoserver">github.com/geoserver/geoserver</a></li>
             <li>Implements OGC standards:<br>WMS, WFS, WCS, WMTS, SLD, etc.</li>
             <li>Many extensions</li>
@@ -219,9 +243,10 @@
         <h2>Why GeoServer Cloud?</h2>
         <div class="slide-content-default">
           <ul>
-            <li>Cloud techs increasingly important in modern GIS architectures</li>
-            <li>Vanilla GeoServer is <b>not</b> cloud-native</li>
-            <li>It's a <b>monolithic</b> application</li>
+            <li><b>Cloud technologies</b> become increasingly<br>
+              important in modern GIS architectures</li>
+            <li>Traditional GeoServer is <b>not</b> cloud-native</li>
+            <li>Traditional GeoServer is a <b>monolithic</b> application</li>
             <li>Lack of native support for <b>horizontal scaling</b></li>
           </ul>
         </div>
@@ -233,9 +258,8 @@
       </section>
 
       <section>
-          <h2>Scaling the monolithic, vanilla GeoServer</h2>
+          <h2>Scaling Traditional GeoServer...</h2>
           <div class="mermaid" style="overflow: auto;">
-            <pre>
 %%{ init: { "theme": "default" } }%%
 flowchart TD
     Clients(["🌐 HTTP Requests"])
@@ -259,17 +283,15 @@ flowchart TD
         end
     end
 
+    Gateway --&gt; GeoServer1
+    Gateway --&gt; GeoServer2
+    Gateway --&gt; GeoServer3
 
-    Gateway --> GeoServer1
-    Gateway --> GeoServer2
-    Gateway --> GeoServer3
+    GeoServer1 --&gt;|use| GSDataDir
+    GeoServer2 --&gt;|use| GSDataDir
+    GeoServer3 --&gt;|use| GSDataDir
 
-    GeoServer1 -->|read/write| GSDataDir
-    GeoServer2 -->|read/write| GSDataDir
-    GeoServer3 -->|read/write| GSDataDir
-
-    Pods --> PostGIS
-          </pre>
+    Pods --&gt; PostGIS
         </div>
         <footer>
           <img src="../img/terrestris.svg" height="50px" />
@@ -279,7 +301,46 @@ flowchart TD
       </section>
 
       <section>
-        <h2>GeoServer Cloud Features</h2>
+        <h2>...is a pain</h2>
+        <div class="slide-content-default">
+          <ul>
+            <li>Replication of <b>full stack</b> GeoServers with all baggage</li>
+            <li>GeoServer loads the Catalog/Datadir into <b>memory</b></li>
+            <li>Updates on one instance <b>won't propagate</b> to others
+            <li>Other instances remain <b>unaware of changes</b> and<br>
+              continue working on their (now outdated) memory state</li>
+          </ul>
+        </div>
+        <footer>
+          <img src="../img/terrestris.svg" height="50px" />
+          <span>State of GeoServer Cloud, FOSS4G-E 2025, Mostar</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2>What could help?</h2>
+        <div class="slide-content-default">
+          <ul>
+            <li>Time-consuming and error-prone approaches:</li>
+                      <ul>
+            <li>Use a "prepared", static <b>read-only</b><br>shared data directory (GS Catalog)</li>
+            <li>Create a <b>script/tool</b> that (periodically) checks<br>
+              for updates to trigger necessary reloads via REST</li>
+            <li>Other workarounds...</li><br>
+          </ul>
+            <li>Solution: <b>GeoServer Cloud</b>!<br>
+          </ul>
+        </div>
+        <footer>
+          <img src="../img/terrestris.svg" height="50px" />
+          <span>State of GeoServer Cloud, FOSS4G-E 2025, Mostar</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2>GeoServer Cloud</h2>
         <div class="slide-content-default" >
           <div class="slide-content-horizontal" style="gap: 20px;">
             <div>
@@ -293,7 +354,7 @@ flowchart TD
               </div>
               <div style="flex: 1;">
                 <span>Cloud-Optimized Features</span><br />
-                <small>High-performance catalog access and security features like GeoServer ACL (Geofencing)</small>
+                <small>High-performance catalog access and extended security features</small>
               </div>
               <div style="flex: 1;">
                 <span>Cloud Native & DevOps Friendly</span><br />
@@ -312,7 +373,37 @@ flowchart TD
       <section>
         <h2>GeoServer Cloud Architecture</h2>
         <div class="slide-content-default">
-          <img src="../img/geoserver-cloud/gs-cloud-architecture.svg"  style="min-height: 500px" />
+          <div class="slide-content-horizontal" style="gap: 20px;">
+            <ul style="padding-left: 2em;">
+              <li>GS Cloud builds on the <b>highly modular</b> structure of the GS codebase</li>
+              <li>Split core functionality into <b>independently scalable</b>, loosely coupled <b>microservices</b><br>
+                <small>(available as Docker images)</small></li>
+              <li><b>Service discovery</b> to support elastic scaling and load balancing</li>
+              <li><b>Event bus</b> to broadcast messages<br>(distributed events)</li>
+            </ul>
+            <img src="../img/geoserver-cloud/gs-cloud-architecture.svg" style="max-width: 750px; padding-right: 2em;" />
+          </div>
+        </div>
+        <footer>
+          <img src="../img/terrestris.svg" height="50px" />
+          <span>State of GeoServer Cloud, FOSS4G-E 2025, Mostar</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2>GeoServer Cloud Architecture</h2>
+        <div class="slide-content-default">
+          <div class="slide-content-horizontal" style="gap: 20px;">
+            <ul style="padding-left: 2em;">
+              <li>Intense usage of the Spring Framework (Spring Boot, Spring Cloud, ...)</li>
+              <li>Tailor-cut activation of functionality (based on Configuration/Profiles)</li>
+              <li>Health checks, metrics and monitoring</li>
+              <li>Smooth integration with cloud environments</li>
+              <li>Flexible deployments</li>
+            </ul>
+            <img src="../img/geoserver-cloud/gs-cloud-architecture.svg" style="max-width: 750px; padding-right: 2em;" />
+          </div>
         </div>
         <footer>
           <img src="../img/terrestris.svg" height="50px" />
@@ -336,14 +427,44 @@ flowchart TD
       </section>
 
       <section>
-        <h2>CodeSprint (October 2024)</h2>
+        <h2>GeoServer Cloud features</h2>
+        <div class="slide-content-default">
+          <ul>
+            <li>PostgreSQL back-end for the GeoServer Catalog<br>
+            → Shared data directory also possible, but not suggested<br>
+            → Try <a href="https://github.com/terrestris/geoserver_sync">https://github.com/terrestris/geoserver_sync</a> to migrate</li>
+            <li>GeoServer ACL (Access Control List)<br>
+            → Advanced authorization for GeoServer<br>
+            → Born as fork of the GeoFence project<br>
+            → Fine-granular access control for services, geographical areas, attributes and more</li>
+            <li>Cloud-optimized GeoWebCache (GWC) integration<br>
+            → distributed event notifications</li>
+          </ul>
+        </div>
+        <footer>
+          <img src="../img/terrestris.svg" height="50px" />
+          <span>State of GeoServer Cloud, FOSS4G-E 2025, Mostar</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2>Integration of GeoServer extensions</h2>
         <div class="slide-content-default">
           <div class="slide-content-horizontal" style="gap: 20px;">
-            <img src="../img/geoserver-cloud/codesprint1.jpg" width="45%" />
-            <img src="../img/geoserver-cloud/codesprint2.jpg" width="45%" />
-          </div>
-          <div>
-            <small>GeoServer Cloud CodeSprint at Camptocamp in Chambéry, France</small>
+            <img src="../img/geoserver-cloud/gs-cloud-extensions-1.png" />
+            <img src="../img/geoserver-cloud/gs-cloud-extensions-2.png" />
+            <div class="small-li-margin">
+              <div>More:</div>
+              <ul>
+                <li>WPS<br><small>(native integration as microservice)</small></li>
+                <li>OGC API Features</li>
+                <li>INSPIRE</li>
+                <li>app-schema</li>
+                <li>Graticule</li>
+                <li>...</li>
+              </ul>
+            </div>
           </div>
         </div>
         <footer>
@@ -354,10 +475,34 @@ flowchart TD
       </section>
 
       <section>
-        <h2>Questions?</h2>
+        <h2>Missing extension?</h2>
+        <div class="slide-content-default">
+          <ul>
+            <li>Extensions need to be integrated in the GS Cloud codebase</li>
+            <li>Big refactoring in April 2025: <a href="https://github.com/geoserver/geoserver-cloud/pull/640">https://github.com/geoserver/geoserver-cloud/pull/640</a></li>
+            <li>Adding new extensions remains a "dev" thing in GS Cloud. Guide:
+              <a href="https://github.com/geoserver/geoserver-cloud/blob/main/docs/develop/extensions/adding_extensions.md">https://github.com/geoserver/geoserver-cloud/blob/main/docs/develop/extensions/adding_extensions.md</a>
+            </li>
+            <li>You need to add</li>
+            <ol>
+              <li>Extension Module</b></li>
+              <li>Starter Module</b></li>
+            </ol>
+          </ul>
+        </div>
+        <footer>
+          <img src="../img/terrestris.svg" height="50px" />
+          <span>State of GeoServer Cloud, FOSS4G-E 2025, Mostar</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2>Case studies</h2>
         <div class="slide-content-default" style="justify-content: center;">
           <div style="padding-top: 1em;">
-            <span><a href="mailto:buehner@terrestris.de" class="email">buehner@terrestris.de</a></span>
+            <div>Questions?<br><a href="mailto:buehner@terrestris.de" class="email">buehner@terrestris.de</a></div><br><br>
+            <div>Now:<br>Case studies and practical experiences with GS Cloud by Alexandre</div>
           </div>
         </div>
         <footer>
