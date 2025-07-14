@@ -373,15 +373,14 @@ flowchart TD
       <section>
         <h2>GeoServer Cloud Architecture</h2>
         <div class="slide-content-default">
-          <div class="slide-content-horizontal" style="gap: 20px;">
+          <div class="slide-content-horizontal small-li-margin" style="gap: 20px;">
             <ul style="padding-left: 2em;">
               <li>GS Cloud builds on the <b>highly modular</b> structure of the GS codebase</li>
-              <li>Split core functionality into <b>independently scalable</b>, loosely coupled <b>microservices</b><br>
-                <small>(available as Docker images)</small></li>
+              <li>Split core functionality into <b>independently scalable</b>, loosely coupled <b>microservices</b></li>
               <li><b>Service discovery</b> to support elastic scaling and load balancing</li>
               <li><b>Event bus</b> to broadcast messages<br>(distributed events)</li>
             </ul>
-            <img src="../img/geoserver-cloud/gs-cloud-architecture.svg" style="max-width: 750px; padding-right: 2em;" />
+            <img src="../img/geoserver-cloud/gs-cloud-architecture.svg" style="max-width: 720px; padding-right: 2em;" />
           </div>
         </div>
         <footer>
@@ -398,11 +397,11 @@ flowchart TD
             <ul style="padding-left: 2em;">
               <li>Intense usage of the Spring Framework (Spring Boot, Spring Cloud, ...)</li>
               <li>Tailor-cut activation of functionality (based on Configuration/Profiles)</li>
-              <li>Health checks, metrics and monitoring</li>
+              <li>Health checks, metrics, monitoring, Logging, Caching, ...</li>
               <li>Smooth integration with cloud environments</li>
               <li>Flexible deployments</li>
             </ul>
-            <img src="../img/geoserver-cloud/gs-cloud-architecture.svg" style="max-width: 750px; padding-right: 2em;" />
+            <img src="../img/geoserver-cloud/gs-cloud-architecture.svg" style="max-width: 720px; padding-right: 2em;" />
           </div>
         </div>
         <footer>
