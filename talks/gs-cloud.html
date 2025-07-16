@@ -220,7 +220,7 @@
         </footer>
       </section>
 
-      <section>
+      <section data-background-image="../img/geoserver-cloud/gs.svg" data-background-opacity="0.25" data-background-size="40%">
         <h2>Traditional GeoServer</h2>
         <div class="slide-content-default gap">
           <ul>
@@ -241,14 +241,17 @@
 
       <section>
         <h2>Why GeoServer Cloud?</h2>
-        <div class="slide-content-default">
-          <ul>
-            <li><b>Cloud technologies</b> become increasingly<br>
-              important in modern GIS architectures</li>
-            <li>Traditional GeoServer is <b>not</b> cloud-native</li>
-            <li>Traditional GeoServer is a <b>monolithic</b> application</li>
-            <li>Lack of native support for <b>horizontal scaling</b></li>
-          </ul>
+        <div class="slide-content-horizontal" style="gap: 20px;">
+          <div class="slide-content-default">
+            <ul>
+              <li><b>Cloud technologies</b> become increasingly<br>
+                important in modern GIS architectures</li>
+              <li>Traditional GeoServer is <b>not</b> cloud-native</li>
+              <li>Traditional GeoServer is a <b>monolithic</b> application</li>
+              <li>Lack of native support for <b>horizontal scaling</b></li>
+            </ul>
+          </div>
+          <img src="../img/geoserver-cloud/gs-cloud-bg.svg" width="40%" />
         </div>
         <footer>
           <img src="../img/terrestris.svg" height="50px" />
@@ -431,7 +434,9 @@ flowchart TD
           <ul>
             <li>PostgreSQL back-end for the GeoServer Catalog<br>
             → Shared data directory also possible, but not suggested<br>
-            → Try <a href="https://github.com/terrestris/geoserver_sync">https://github.com/terrestris/geoserver_sync</a> to migrate</li>
+            → Wanna migrate from data directory to PostgreSQL?<br>
+            <small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ Talk of Alexandre on Friday: Migrate and Synchronize GeoServer configuration with Terraform<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ Or try <a href="https://github.com/terrestris/geoserver_sync">https://github.com/terrestris/geoserver_sync</a></small></li>
             <li>GeoServer ACL (Access Control List)<br>
             → Advanced authorization for GeoServer<br>
             → Born as fork of the GeoFence project<br>
