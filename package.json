@@ -5,11 +5,14 @@
   "description": "Materials for the FOSS4G-E 2025",
   "scripts": {
     "start": "vite dev",
-    "build": "vite build"
+    "build": "vite build",
+    "build-pdf": "decktape --size 1600x900 --pause 50 reveal"
   },
   "author": "terrestris GmbH & Co. KG",
   "license": "cc-by-sa-4.0",
-  "dependencies": { },
+  "dependencies": {
+    "decktape": "^3.15.0"
+  },
   "devDependencies": {
     "vite": "^7.0.0"
   }
