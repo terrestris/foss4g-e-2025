@@ -229,7 +229,7 @@
                   <li>Points</li>
                   <li>Labels</li>
                   <li>Marks</li>
-                  <li>Hatches</li>
+                  <li>Hatching</li>
                   <li>...</li>
                 </ul>
                 <li>Limitations</li>
@@ -369,12 +369,56 @@
       <section>
         <h2>GeoStyler REST + OGC API Styles</h2>
         <div class="slide-content-default">
-          <div>
-            <span>Try it out:</span>
-            <a href="https://rest.geostyler.org">rest.geostyler.org</a>
-          </div>
-          <iframe class="img-shadow" data-src="https://rest.geostyler.org/api-docs#tag/default/get/ogc/styles"
-            data-preload width="100%" height="100%"></iframe>
+            <a href="https://rest.geostyler.org/ogc/styles?f=json">GET rest.geostyler.org/ogc/styles | Accept: application/json</a>
+            <div>
+              <pre>
+                <code>{
+  "styles": [
+    {
+      "id": "population_quantiles",
+      "title": "population_quantiles",
+      "links": [
+        {
+          "href": "http://rest.geostyler.org/ogc/styles/population_quantiles?f=sld10",
+          "type": "application/vnd.ogc.sld+xml;version=1.0",
+          "rel": "stylesheet"
+        },
+        {
+          "href": "http://rest.geostyler.org/ogc/styles/population_quantiles?f=sld11",
+          "type": "application/vnd.ogc.sld+xml;version=1.1",
+          "rel": "stylesheet"
+        },
+        {
+          "href": "http://rest.geostyler.org/ogc/styles/population_quantiles?f=lyrx",
+          "type": "application/x-esri-lyrx",
+          "rel": "stylesheet"
+        },
+        {
+          "href": "http://rest.geostyler.org/ogc/styles/population_quantiles?f=mapbox",
+          "type": "application/vnd.mapbox.style+json",
+          "rel": "stylesheet"
+        },
+        {
+          "href": "http://rest.geostyler.org/ogc/styles/population_quantiles?f=qgis",
+          "type": "application/vnd.qgis.style+xml",
+          "rel": "stylesheet"
+        },
+        {
+          "href": "http://rest.geostyler.org/ogc/styles/population_quantiles?f=geostyler",
+          "type": "application/vnd.geostyler+json",
+          "rel": "stylesheet"
+        },
+        {
+          "href": "http://rest.geostyler.org/ogc/styles/population_quantiles/metadata?f=json",
+          "type": "application/json",
+          "rel": "describedBy"
+        }
+      ]   
+    }
+  ]
+}</code>
+              </pre>
+            </div>
         </div>
         <footer>
           <img src="../img/geostyler/geostyler_logo.svg" height="30px" />
@@ -383,6 +427,574 @@
           <div></div>
         </footer>
       </section>
+
+      <section>
+        <h2>GeoStyler REST + OGC API Styles</h2>
+        <div class="slide-content-default">
+            <a href="https://rest.geostyler.org/ogc/styles/population_quantiles?f=sld10">GET rest.geostyler.org/ogc/styles/population_quantiles | Accept: application/vnd.ogc.sld+xml;version=1.0</a>
+            <div>
+              <pre>
+                <code><script type="text/template"><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<StyledLayerDescriptor version="1.0.0"
+  xsi:schemaLocation="http://www.opengis.net/sld StyledLayerDescriptor.xsd"
+  xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc"
+  xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:se="http://www.opengis.net/se">
+  <NamedLayer>
+    <Name>Population Quantiles</Name>
+    <UserStyle>
+      <Name>Population Quantiles</Name>
+      <Title>Population Quantiles</Title>
+      <FeatureTypeStyle>
+        <Rule>
+          <Name>679000 - 2071000</Name>
+          <Filter xmlns="http://www.opengis.net/ogc">
+            <And>
+              <PropertyIsGreaterThanOrEqualTo>
+                <PropertyName>pop</PropertyName>
+                <Literal>679000</Literal>
+              </PropertyIsGreaterThanOrEqualTo>
+              <PropertyIsLessThan>
+                <PropertyName>pop</PropertyName>
+                <Literal>2071000</Literal>
+              </PropertyIsLessThan>
+            </And>
+          </Filter>
+          <PolygonSymbolizer>
+            <Fill>
+              <CssParameter name="fill">#f7f4f9</CssParameter>
+            </Fill>
+          </PolygonSymbolizer>
+        </Rule>
+        <Rule>
+          <Name>2071000 - 3228500</Name>
+          <Filter xmlns="http://www.opengis.net/ogc">
+            <And>
+              <PropertyIsGreaterThanOrEqualTo>
+                <PropertyName>pop</PropertyName>
+                <Literal>2071000</Literal>
+              </PropertyIsGreaterThanOrEqualTo>
+              <PropertyIsLessThan>
+                <PropertyName>pop</PropertyName>
+                <Literal>3228500</Literal>
+              </PropertyIsLessThan>
+            </And>
+          </Filter>
+          <PolygonSymbolizer>
+            <Fill>
+              <CssParameter name="fill">#cda0cf</CssParameter>
+            </Fill>
+          </PolygonSymbolizer>
+        </Rule>
+        <Rule>
+          <Name>3228500 - 6646250</Name>
+          <Filter xmlns="http://www.opengis.net/ogc">
+            <And>
+              <PropertyIsGreaterThanOrEqualTo>
+                <PropertyName>pop</PropertyName>
+                <Literal>3228500</Literal>
+              </PropertyIsGreaterThanOrEqualTo>
+              <PropertyIsLessThan>
+                <PropertyName>pop</PropertyName>
+                <Literal>6646250</Literal>
+              </PropertyIsLessThan>
+            </And>
+          </Filter>
+          <PolygonSymbolizer>
+            <Fill>
+              <CssParameter name="fill">#e71978</CssParameter>
+            </Fill>
+          </PolygonSymbolizer>
+        </Rule>
+        <Rule>
+          <Name>6646250 - 17890000</Name>
+          <Filter xmlns="http://www.opengis.net/ogc">
+            <And>
+              <PropertyIsGreaterThanOrEqualTo>
+                <PropertyName>pop</PropertyName>
+                <Literal>6646250</Literal>
+              </PropertyIsGreaterThanOrEqualTo>
+              <PropertyIsLessThanOrEqualTo>
+                <PropertyName>pop</PropertyName>
+                <Literal>17890000</Literal>
+              </PropertyIsLessThanOrEqualTo>
+            </And>
+          </Filter>
+          <PolygonSymbolizer>
+            <Fill>
+              <CssParameter name="fill">#67001f</CssParameter>
+            </Fill>
+          </PolygonSymbolizer>
+        </Rule>
+      </FeatureTypeStyle>
+    </UserStyle>
+  </NamedLayer>
+</StyledLayerDescriptor>
+</script></code>
+              </pre>
+            </div>
+        </div>
+        <footer>
+          <img src="../img/geostyler/geostyler_logo.svg" height="30px" />
+          <span>GeoStyler - Support for ArcGIS and other new Features, FOSS4G Europe 2025, Mostar,
+            Bosnia-Herzegovina</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2>GeoStyler REST + OGC API Styles</h2>
+        <div class="slide-content-default">
+            <a href="https://rest.geostyler.org/ogc/styles/population_quantiles?f=sld11">GET rest.geostyler.org/ogc/styles/population_quantiles | Accept: application/vnd.ogc.sld+xml;version=1.1</a>
+            <div>
+              <pre>
+                <code><script type="text/template"><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<StyledLayerDescriptor version="1.1.0"
+  xsi:schemaLocation="http://www.opengis.net/sld StyledLayerDescriptor.xsd"
+  xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc"
+  xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:se="http://www.opengis.net/se">
+  <NamedLayer>
+    <se:Name>Population Quantiles</se:Name>
+    <UserStyle>
+      <se:Name>Population Quantiles</se:Name>
+      <se:FeatureTypeStyle>
+        <se:Rule>
+          <se:Name>679000 - 2071000</se:Name>
+          <Filter xmlns="http://www.opengis.net/ogc">
+            <And>
+              <PropertyIsGreaterThanOrEqualTo>
+                <PropertyName>pop</PropertyName>
+                <Literal>679000</Literal>
+              </PropertyIsGreaterThanOrEqualTo>
+              <PropertyIsLessThan>
+                <PropertyName>pop</PropertyName>
+                <Literal>2071000</Literal>
+              </PropertyIsLessThan>
+            </And>
+          </Filter>
+          <se:PolygonSymbolizer>
+            <se:Fill>
+              <se:SvgParameter name="fill">#f7f4f9</se:SvgParameter>
+            </se:Fill>
+          </se:PolygonSymbolizer>
+        </se:Rule>
+        <se:Rule>
+          <se:Name>2071000 - 3228500</se:Name>
+          <Filter xmlns="http://www.opengis.net/ogc">
+            <And>
+              <PropertyIsGreaterThanOrEqualTo>
+                <PropertyName>pop</PropertyName>
+                <Literal>2071000</Literal>
+              </PropertyIsGreaterThanOrEqualTo>
+              <PropertyIsLessThan>
+                <PropertyName>pop</PropertyName>
+                <Literal>3228500</Literal>
+              </PropertyIsLessThan>
+            </And>
+          </Filter>
+          <se:PolygonSymbolizer>
+            <se:Fill>
+              <se:SvgParameter name="fill">#cda0cf</se:SvgParameter>
+            </se:Fill>
+          </se:PolygonSymbolizer>
+        </se:Rule>
+        <se:Rule>
+          <se:Name>3228500 - 6646250</se:Name>
+          <Filter xmlns="http://www.opengis.net/ogc">
+            <And>
+              <PropertyIsGreaterThanOrEqualTo>
+                <PropertyName>pop</PropertyName>
+                <Literal>3228500</Literal>
+              </PropertyIsGreaterThanOrEqualTo>
+              <PropertyIsLessThan>
+                <PropertyName>pop</PropertyName>
+                <Literal>6646250</Literal>
+              </PropertyIsLessThan>
+            </And>
+          </Filter>
+          <se:PolygonSymbolizer>
+            <se:Fill>
+              <se:SvgParameter name="fill">#e71978</se:SvgParameter>
+            </se:Fill>
+          </se:PolygonSymbolizer>
+        </se:Rule>
+        <se:Rule>
+          <se:Name>6646250 - 17890000</se:Name>
+          <Filter xmlns="http://www.opengis.net/ogc">
+            <And>
+              <PropertyIsGreaterThanOrEqualTo>
+                <PropertyName>pop</PropertyName>
+                <Literal>6646250</Literal>
+              </PropertyIsGreaterThanOrEqualTo>
+              <PropertyIsLessThanOrEqualTo>
+                <PropertyName>pop</PropertyName>
+                <Literal>17890000</Literal>
+              </PropertyIsLessThanOrEqualTo>
+            </And>
+          </Filter>
+          <se:PolygonSymbolizer>
+            <se:Fill>
+              <se:SvgParameter name="fill">#67001f</se:SvgParameter>
+            </se:Fill>
+          </se:PolygonSymbolizer>
+        </se:Rule>
+      </se:FeatureTypeStyle>
+    </UserStyle>
+  </NamedLayer>
+</StyledLayerDescriptor>
+</script></code>
+              </pre>
+            </div>
+        </div>
+        <footer>
+          <img src="../img/geostyler/geostyler_logo.svg" height="30px" />
+          <span>GeoStyler - Support for ArcGIS and other new Features, FOSS4G Europe 2025, Mostar,
+            Bosnia-Herzegovina</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2>GeoStyler REST + OGC API Styles</h2>
+        <div class="slide-content-default">
+            <a href="https://rest.geostyler.org/ogc/styles/population_quantiles?f=qgis">GET rest.geostyler.org/ogc/styles/population_quantiles | Accept: application/vnd.qgis.style+xml</a>
+            <div>
+              <pre>
+                <code><script type="text/template"><!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
+<qgis version="3.28.0-Firenze">
+  <renderer-v2 type="RuleRenderer">
+    <rules key="renderer_rules">
+      <rule key="renderer_rule_0" symbol="0" label="679000 - 2071000" filter="pop >= '679000' AND pop &lt; '2071000'"/>
+      <rule key="renderer_rule_1" symbol="1" label="2071000 - 3228500" filter="pop >= '2071000' AND pop &lt; '3228500'"/>
+      <rule key="renderer_rule_2" symbol="2" label="3228500 - 6646250" filter="pop >= '3228500' AND pop &lt; '6646250'"/>
+      <rule key="renderer_rule_3" symbol="3" label="6646250 - 17890000" filter="pop >= '6646250' AND pop &lt;= '17890000'"/>
+    </rules>
+    <symbols>
+      <symbol type="fill" name="0">
+        <layer class="SimpleFill">
+          <Option type="Map">
+            <Option name="color" value="247,244,249,255" type="QString"/>
+            <Option name="offset_map_unit_scale" value="3x:0,0,0,0,0,0" type="QString"/>
+            <Option name="offset_unit" value="Pixel" type="QString"/>
+            <Option name="outline_style" value="solid" type="QString"/>
+            <Option name="outline_width" value="0" type="QString"/>
+            <Option name="outline_width_map_unit_scale" value="3x:0,0,0,0,0,0" type="QString"/>
+            <Option name="outline_width_unit" value="Pixel" type="QString"/>
+            <Option name="outline_color" value="0,0,0,255" type="QString"/>
+          </Option>
+        </layer>
+      </symbol>
+      <symbol type="fill" name="1">
+        <layer class="SimpleFill">
+          <Option type="Map">
+            <Option name="color" value="205,160,207,255" type="QString"/>
+            <Option name="offset_map_unit_scale" value="3x:0,0,0,0,0,0" type="QString"/>
+            <Option name="offset_unit" value="Pixel" type="QString"/>
+            <Option name="outline_style" value="solid" type="QString"/>
+            <Option name="outline_width" value="0" type="QString"/>
+            <Option name="outline_width_map_unit_scale" value="3x:0,0,0,0,0,0" type="QString"/>
+            <Option name="outline_width_unit" value="Pixel" type="QString"/>
+            <Option name="outline_color" value="0,0,0,255" type="QString"/>
+          </Option>
+        </layer>
+      </symbol>
+      <symbol type="fill" name="2">
+        <layer class="SimpleFill">
+          <Option type="Map">
+            <Option name="color" value="231,25,120,255" type="QString"/>
+            <Option name="offset_map_unit_scale" value="3x:0,0,0,0,0,0" type="QString"/>
+            <Option name="offset_unit" value="Pixel" type="QString"/>
+            <Option name="outline_style" value="solid" type="QString"/>
+            <Option name="outline_width" value="0" type="QString"/>
+            <Option name="outline_width_map_unit_scale" value="3x:0,0,0,0,0,0" type="QString"/>
+            <Option name="outline_width_unit" value="Pixel" type="QString"/>
+            <Option name="outline_color" value="0,0,0,255" type="QString"/>
+          </Option>
+        </layer>
+      </symbol>
+      <symbol type="fill" name="3">
+        <layer class="SimpleFill">
+          <Option type="Map">
+            <Option name="color" value="103,0,31,255" type="QString"/>
+            <Option name="offset_map_unit_scale" value="3x:0,0,0,0,0,0" type="QString"/>
+            <Option name="offset_unit" value="Pixel" type="QString"/>
+            <Option name="outline_style" value="solid" type="QString"/>
+            <Option name="outline_width" value="0" type="QString"/>
+            <Option name="outline_width_map_unit_scale" value="3x:0,0,0,0,0,0" type="QString"/>
+            <Option name="outline_width_unit" value="Pixel" type="QString"/>
+            <Option name="outline_color" value="0,0,0,255" type="QString"/>
+          </Option>
+        </layer>
+      </symbol>
+    </symbols>
+  </renderer-v2>
+</qgis>
+</script></code>
+              </pre>
+            </div>
+        </div>
+        <footer>
+          <img src="../img/geostyler/geostyler_logo.svg" height="30px" />
+          <span>GeoStyler - Support for ArcGIS and other new Features, FOSS4G Europe 2025, Mostar,
+            Bosnia-Herzegovina</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2>GeoStyler REST + OGC API Styles</h2>
+        <div class="slide-content-default">
+            <a href="https://rest.geostyler.org/ogc/styles/population_quantiles?f=mapbox">GET rest.geostyler.org/ogc/styles/population_quantiles | Accept: application/vnd.mapbox.style+json</a>
+            <div>
+              <pre>
+                <code style="min-width: 800px"><script type="text/template">{
+  "version": 8,
+  "name": "Population Quantiles",
+  "layers": [
+    {
+      "filter": [
+        "all",
+        [
+          ">=",
+          "pop",
+          "679000"
+        ],
+        [
+          "<",
+          "pop",
+          "2071000"
+        ]
+      ],
+      "type": "fill",
+      "paint": {
+        "fill-color": "#f7f4f9"
+      },
+      "id": "r0_sy0_st0"
+    },
+    {
+      "filter": [
+        "all",
+        [
+          ">=",
+          "pop",
+          "2071000"
+        ],
+        [
+          "<",
+          "pop",
+          "3228500"
+        ]
+      ],
+      "type": "fill",
+      "paint": {
+        "fill-color": "#cda0cf"
+      },
+      "id": "r1_sy0_st0"
+    },
+    {
+      "filter": [
+        "all",
+        [
+          ">=",
+          "pop",
+          "3228500"
+        ],
+        [
+          "<",
+          "pop",
+          "6646250"
+        ]
+      ],
+      "type": "fill",
+      "paint": {
+        "fill-color": "#e71978"
+      },
+      "id": "r2_sy0_st0"
+    },
+    {
+      "filter": [
+        "all",
+        [
+          ">=",
+          "pop",
+          "6646250"
+        ],
+        [
+          "<=",
+          "pop",
+          "17890000"
+        ]
+      ],
+      "type": "fill",
+      "paint": {
+        "fill-color": "#67001f"
+      },
+      "id": "r3_sy0_st0"
+    }
+  ],
+  "sources": {},
+  "metadata": {
+    "geostyler:ref": {
+      "rules": [
+        {
+          "name": "679000 - 2071000",
+          "symbolizers": [
+            [
+              "r0_sy0_st0"
+            ]
+          ]
+        },
+        {
+          "name": "2071000 - 3228500",
+          "symbolizers": [
+            [
+              "r1_sy0_st0"
+            ]
+          ]
+        },
+        {
+          "name": "3228500 - 6646250",
+          "symbolizers": [
+            [
+              "r2_sy0_st0"
+            ]
+          ]
+        },
+        {
+          "name": "6646250 - 17890000",
+          "symbolizers": [
+            [
+              "r3_sy0_st0"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}
+</script></code>
+              </pre>
+            </div>
+        </div>
+        <footer>
+          <img src="../img/geostyler/geostyler_logo.svg" height="30px" />
+          <span>GeoStyler - Support for ArcGIS and other new Features, FOSS4G Europe 2025, Mostar,
+            Bosnia-Herzegovina</span>
+          <div></div>
+        </footer>
+      </section>
+
+      <section>
+        <h2>GeoStyler REST + OGC API Styles</h2>
+        <div class="slide-content-default">
+            <a href="https://rest.geostyler.org/ogc/styles/population_quantiles?f=geostyler">GET rest.geostyler.org/ogc/styles/population_quantiles | Accept: application/vnd.geostyler+json</a>
+            <div>
+              <pre>
+                <code style="min-width: 800px"><script type="text/template">{
+  "name": "Population Quantiles",
+  "rules": [
+    {
+      "name": "679000 - 2071000",
+      "filter": [
+        "&&",
+        [
+          ">=",
+          "pop",
+          "679000"
+        ],
+        [
+          "<",
+          "pop",
+          "2071000"
+        ]
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#f7f4f9"
+        }
+      ]
+    },
+    {
+      "name": "2071000 - 3228500",
+      "filter": [
+        "&&",
+        [
+          ">=",
+          "pop",
+          "2071000"
+        ],
+        [
+          "<",
+          "pop",
+          "3228500"
+        ]
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#cda0cf"
+        }
+      ]
+    },
+    {
+      "name": "3228500 - 6646250",
+      "filter": [
+        "&&",
+        [
+          ">=",
+          "pop",
+          "3228500"
+        ],
+        [
+          "<",
+          "pop",
+          "6646250"
+        ]
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#e71978"
+        }
+      ]
+    },
+    {
+      "name": "6646250 - 17890000",
+      "filter": [
+        "&&",
+        [
+          ">=",
+          "pop",
+          "6646250"
+        ],
+        [
+          "<=",
+          "pop",
+          "17890000"
+        ]
+      ],
+      "symbolizers": [
+        {
+          "kind": "Fill",
+          "color": "#67001f"
+        }
+      ]
+    }
+  ]
+}</script></code>
+              </pre>
+            </div>
+        </div>
+        <footer>
+          <img src="../img/geostyler/geostyler_logo.svg" height="30px" />
+          <span>GeoStyler - Support for ArcGIS and other new Features, FOSS4G Europe 2025, Mostar,
+            Bosnia-Herzegovina</span>
+          <div></div>
+        </footer>
+      </section>
+
 
       <section>
         <h2>GeoStyler REST + OGC API Styles</h2>
@@ -395,6 +1007,13 @@
             <hr />
             <li>Transition to Open Source Software and Open Standards</li>
           </ul>
+          <div>
+            <span>Try it out:</span>
+            <a href="https://rest.geostyler.org">rest.geostyler.org</a>
+            <br />
+            <span>Repository:</span>
+            <a href="https://github.com/geostyler/geostyler-rest">geostyler/geostyler-rest</a>
+          </div>
         </div>
         <footer>
           <img src="../img/geostyler/geostyler_logo.svg" height="30px" />
